@@ -1,0 +1,262 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css"> 
+	
+	
+	<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css"> 
+	<link href="/stylesheets/datepicker.css" rel="stylesheet" type="text/css" />
+	<link href="/sweetalert2/dist/sweetalert2.css" rel="stylesheet" type="text/css" />
+	
+	<script src="/jquery/dist/jquery.js"></script>
+	<script src="/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="/javascripts/login.js"></script> 
+	<script src="/javascripts/datepicker.js"></script>
+	<script src="/sweetalert2/dist/sweetalert2.js"></script>
+	
+	<script src="/javascripts/src/adminhome.js"></script>
+	
+	
+	<script>
+	$(function () {
+		  $("#admissiondatepicker").datepicker({ 
+				autoclose: true, 
+				todayHighlight: true
+		  }).datepicker('update', new Date());
+		  myFunction();
+		  });
+	function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+  
+</head>
+<body>
+<div class="container">
+    
+        <h1>Online Vehicle Service.</h1>
+    
+    <div class="row">
+    	
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-primary">
+                <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1primary" data-toggle="tab">Branch</a></li>
+                            <li><a href="#tab2primary" data-toggle="tab">Users</a></li>
+                            <li id="servicetab"><a href="#tab3primary" data-toggle="tab">Service</a></li>
+                            <li id="billingtab"><a href="#tab4primary" data-toggle="tab">Billing</a></li>
+                            
+                            <li><a style="cursor:pointer" onclick="logout()">Logout</a></li>
+                            
+                        </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1primary">
+							<div class="col-sm-4" id="AddBranch">
+								 <div class="form-group">
+									<label for="inputsm">Branch</label>
+									<input name="branchname" class="form-control input-sm" id="inputsm" type="text">
+								  </div>
+								  <div class="form-group">
+									<label for="inputsm">Land mark</label>
+									<input name="branchlandmark" class="form-control input-sm" id="inputsm" type="text">
+								  </div>
+								  <div class="form-group">
+									<label for="inputsm">Pincode</label>
+									<input name="branchpincode" class="form-control input-sm" id="inputsm" type="text">
+								  </div>
+								   <div class="form-group">
+									  <label for="comment">Full Address</label>
+									  <textarea name="branchaddress" class="form-control" rows="5" id="comment"></textarea>
+									</div> 
+									<button onclick="AddBranch()" type="button" class="btn btn-success">Add</button>
+							</div>
+							<div class="col-sm-8" id="BranchList">
+								
+								
+							</div>
+						</div>
+                        <div class="tab-pane fade" id="tab2primary">
+						
+							<div class="col-sm-4" id="AddUsers">
+							 <div class="form-group">
+								<label for="inputsm">Name</label>
+								<input name="username" class="form-control input-sm" id="inputsm" type="text">
+							  </div>
+							  <div class="form-group">
+								<label for="inputsm">Mobile Number</label>
+								<input name="usermobile" class="form-control input-sm" id="inputsm" type="text">
+							  </div>
+							  <div class="form-group">
+								<label for="inputsm">Password</label>
+								<input name="userpass" class="form-control input-sm" id="inputsm" type="text">
+							  </div>
+							   <div class="form-group">
+								<label for="inputsm">Confirm Password</label>
+								<input name="usercnpass" class="form-control input-sm" id="inputsm" type="text">
+							  </div>
+							   <div class="form-group">
+								  <label for="comment">Full Address</label>
+								  <textarea name="useraddress" class="form-control" rows="5" id="comment"></textarea>
+								</div> 
+								<button onclick="AddUser()" type="button" class="btn btn-success">Add</button>
+						</div>
+							<div class="col-sm-8" id="ShowUserList">
+								
+								
+							</div>
+						
+						</div>
+						
+                        <div class="tab-pane fade" id="tab3primary">
+						
+							<div class="col-sm-4" id="AddService">
+								<div class="form-group">
+									<label for="inputsm">Mobile Number</label>
+									<input name="sermobile" class="form-control input-sm" id="inputsm" type="text">
+								</div>
+									<button onclick="searchService()" type="button" class="btn btn-info">Search</button>
+								  <div class="form-group">
+									<label for="inputsm">Name</label>
+									<input name="sername" class="form-control input-sm" readonly id="inputsm" type="text">
+								  </div>
+								  <div class="form-group">
+									<label for="inputsm">Mobile Number</label>
+									<input name="sermno" class="form-control input-sm" id="inputsm" readonly type="text">
+								  </div>
+								  <div class="form-group">
+									  <label for="inputsm">Branch</label>
+									  <select id="serbranch" class="form-control" id="canoption">
+									   
+									  </select>
+								  </div>
+								  <div class="form-group">
+									  <label for="inputsm">Vehicle Type</label>
+									  <select id="servehicle" class="form-control" id="canoption">
+									  <option value="1">Car</option>
+									  <option value="2">Bike</option>
+									  </select>
+								  </div>
+								  <div class="form-group">
+									<label for="inputsm">Car / Bike Number</label>
+									<input name="serno" class="form-control input-sm" id="inputsm" type="text">
+								  </div>
+								  <div class="form-group">
+									  <label for="comment">Problem</label>
+									  <textarea name="serproblem" name="problem" class="form-control" rows="3" ></textarea>
+									</div> 
+								   
+								   <div class="form-group">
+									  <label for="comment">Full Address</label>
+									  <textarea name="seraddress" class="form-control" rows="5" id="comment"></textarea>
+									</div> 
+									<button id="addservice" type="button" class="btn btn-success">Add</button>
+							</div>
+							<div class="col-sm-8" >
+								<div class="form-group">
+									  <label for="inputsm">Branch</label>
+									  <select id="serchbranch" class="form-control" id="canoption">
+									  
+									  </select>
+							    </div>
+								<div id="showServiceList">
+									
+								</div>
+								
+							</div>
+						
+						
+						</div>
+                        <div class="tab-pane fade" id="tab4primary">
+							<div class="col-sm-4" id="AddBilling">
+								<div class="form-group">
+									<label for="inputsm">Service No</label>
+									<input name="billserno" class="form-control input-sm" id="inputsm" type="text">
+								</div>
+									<button onclick="SearchBilling()" type="button" class="btn btn-info">Search</button>
+								<div class="form-group">
+									<label for="inputsm">Amount</label>
+									<input name="billamount" class="form-control input-sm"  id="inputsm" type="text">
+								  </div>
+								  <div class="form-group">
+									<label for="inputsm">Branch</label>
+									<input name="billbranch" class="form-control input-sm" readonly id="inputsm" type="text">
+								  </div>
+								  <div class="form-group">
+									<label for="inputsm">Name</label>
+									<input name="billname" class="form-control input-sm" readonly id="inputsm" type="text">
+								  </div>
+								  <div class="form-group">
+									<label for="inputsm">Mobile Number</label>
+									<input name="billmobile" class="form-control input-sm" id="inputsm" readonly type="text">
+								  </div>
+								  <div class="form-group">
+									<label for="inputsm">Vehicle Type</label>
+									<input name="billvehicle" readonly class="form-control input-sm" id="inputsm" type="text">
+								  </div>
+								  <div class="form-group">
+									<label for="inputsm">Car / Bike Number</label>
+									<input name="billvehicleno" readonly class="form-control input-sm" id="inputsm" type="text">
+								  </div>
+								  <div class="form-group">
+									  <label for="comment">Problem</label>
+									  <textarea name="billproblem" readonly class="form-control" rows="3" ></textarea>
+									</div> 
+								   
+								   <div class="form-group">
+									  <label for="comment">Full Address</label>
+									  <textarea name="billaddress" readonly class="form-control" rows="5" id="comment"></textarea>
+									</div> 
+									<button id="addbill" type="button" class="btn btn-success">Add</button>
+							</div>
+							
+							<div class="col-sm-8" >
+								<div class="form-group">
+									  <label for="inputsm">Branch</label>
+									  <select id="billbranch" class="form-control" id="canoption">
+									  
+									  </select>
+							    </div>
+								<div class="form-group">
+									<div  id="admissiondatepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+										<input class="form-control" id="admissiondate" type="text" readonly />
+										<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+									</div>
+								</div>
+								<h3 id="totalbill" style="float:right"> Total:0</h3>
+								<div id="showBillingList">
+									<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+									<table id="myTable">
+									  
+									  
+									</table>
+								</div>
+								
+							</div>
+						</div>
+                        <div class="tab-pane fade" id="tab5primary">Primary 5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+
+<br/>
+</body>
+</html>
